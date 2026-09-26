@@ -1,0 +1,3 @@
+# Codex runs the project hooks in .codex/hooks.json only with this on; forge sync keeps it on.
+[features]
+hooks = true
