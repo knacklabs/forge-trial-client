@@ -1,0 +1,14 @@
+{
+  "base": "4981fde263d792b5622f5fcbfc36bbceb6e7006b",
+  "branch": "fix/the-repo-has-no-readme-so-a-visitor-can",
+  "done_when": "README.md says this is KnackLabs' private trial client for Forge and that forge next gives the next step",
+  "kind": "fix",
+  "status": "started",
+  "steps": [
+    {
+      "at": "2026-09-26T17:58:41+00:00",
+      "step": "start"
+    }
+  ],
+  "why": "The repo has no README, so a visitor can't tell what it is or how to work in it"
+}
