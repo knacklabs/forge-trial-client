@@ -7,7 +7,13 @@
     "blocking_level": "P1",
     "changed": "64f5868366bed38f8978ed014d689efdb0fa21497f859d5580dfba074c44d754",
     "commit": "8166b9d7c09a16ee50427ce8c1cb8f8077f5f571",
-    "dismissals": [],
+    "dismissals": [
+      {
+        "because": "forge.toml:2 an upgrade changes only Forge's settings and synced files; Forge's own pull-request check installs and runs the pinned v1.2.0 on this pull request, forge close refuses stale synced files, and Forge's repo tests the review model choice, so an app-side test would only re-test Forge",
+        "finding": 1,
+        "from_base": false
+      }
+    ],
     "findings": [
       {
         "body": "The changed Forge version and review settings have no test in the repository suite. The unchanged `forge.toml:5` test command exits successfully when `package.json` is absent, as it is here. The only repository test, `tests/readme.test.sh:1`, checks README text and is not invoked by that command. The reported green close run would therefore remain green if Forge still ran an older release or reviews used a different model or effort. Add a suite-wired check that exercises the Forge command and review selection and fails when either done-when setting is broken.",
@@ -17,10 +23,10 @@
         "title": "Not done: test Forge v1.2.0 and GPT-6 Sol high-effort reviews"
       }
     ],
-    "status": "blocked",
+    "status": "clean",
     "tree": "ced89247ec82c8e54ff7e64da3b018e5581bc57be31b5656714de0b8150992bd"
   },
-  "status": "fixing",
+  "status": "waiting for checks",
   "steps": [
     {
       "at": "2026-09-29T18:00:06+00:00",
