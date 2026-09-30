@@ -5,28 +5,22 @@
   "kind": "fix",
   "review": {
     "blocking_level": "P1",
-    "changed": "64f5868366bed38f8978ed014d689efdb0fa21497f859d5580dfba074c44d754",
-    "commit": "8166b9d7c09a16ee50427ce8c1cb8f8077f5f571",
-    "dismissals": [
-      {
-        "because": "forge.toml:2 an upgrade changes only Forge's settings and synced files; Forge's own pull-request check installs and runs the pinned v1.2.0 on this pull request, forge close refuses stale synced files, and Forge's repo tests the review model choice, so an app-side test would only re-test Forge",
-        "finding": 1,
-        "from_base": false
-      }
-    ],
+    "changed": "a3a56150692aaadc6ab2f3cf4658efb0fd3e7bb45cd3e955f43f70f687597e9e",
+    "commit": "86bb5276b597de8f5cb06ade95cfc6d6dcb5f9f1",
+    "dismissals": [],
     "findings": [
       {
-        "body": "The changed Forge version and review settings have no test in the repository suite. The unchanged `forge.toml:5` test command exits successfully when `package.json` is absent, as it is here. The only repository test, `tests/readme.test.sh:1`, checks README text and is not invoked by that command. The reported green close run would therefore remain green if Forge still ran an older release or reviews used a different model or effort. Add a suite-wired check that exercises the Forge command and review selection and fails when either done-when setting is broken.",
+        "body": "The review configuration selects `gpt-6.1-sol`, while the Done-when explicitly requires GPT-6 Sol (`gpt-6-sol`). The version pin and high effort setting meet their requirements, but reviews select a different model. Change `[models.review].model` to `gpt-6-sol`.",
         "file": "forge.toml",
-        "line": 2,
+        "line": 30,
         "priority": "P1",
-        "title": "Not done: test Forge v1.2.0 and GPT-6 Sol high-effort reviews"
+        "title": "Not done: Forge runs v1.2.0 and reviews run on GPT-6 Sol at high effort"
       }
     ],
-    "status": "clean",
-    "tree": "ced89247ec82c8e54ff7e64da3b018e5581bc57be31b5656714de0b8150992bd"
+    "status": "blocked",
+    "tree": "0b87f0e416adfd045940df530fb6d9c5f8d99436c4a18d47310f37af00db2698"
   },
-  "status": "waiting for checks",
+  "status": "fixing",
   "steps": [
     {
       "at": "2026-09-29T18:00:06+00:00",
@@ -34,6 +28,10 @@
     },
     {
       "at": "2026-09-29T18:03:23+00:00",
+      "step": "review"
+    },
+    {
+      "at": "2026-09-30T00:56:36+00:00",
       "step": "review"
     }
   ],
