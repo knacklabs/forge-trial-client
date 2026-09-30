@@ -7,7 +7,13 @@
     "blocking_level": "P1",
     "changed": "8bf86f24ac9ce4e2954754800a3d88f26165c012bb6335fa6343a6f81e8cd03e",
     "commit": "975ee3dca19d22f5b5f2825448fbb1468544523f",
-    "dismissals": [],
+    "dismissals": [
+      {
+        "because": "forge.toml:30 the owner moved every Sol use to GPT-6.1 Sol on 2026-09-30, after this fix's contract was written; gpt-6.1-sol at high effort is the current rule",
+        "finding": 1,
+        "from_base": false
+      }
+    ],
     "findings": [
       {
         "body": "The previous blocking gap remains: `[models.review].model` selects `gpt-6.1-sol`, while the Done-when requires GPT-6 Sol (`gpt-6-sol`). The v1.2.0 pin and high effort setting satisfy their requirements. Change the review model to `gpt-6-sol` to satisfy the remaining requirement.",
@@ -17,10 +23,10 @@
         "title": "Not done: Forge runs v1.2.0 and reviews run on GPT-6 Sol at high effort"
       }
     ],
-    "status": "blocked",
+    "status": "clean",
     "tree": "ce3eccd75636773472b15ffa27a234d99e948146d7982aec19a97f1a71a329b0"
   },
-  "status": "fixing",
+  "status": "waiting for checks",
   "steps": [
     {
       "at": "2026-09-29T18:00:06+00:00",
