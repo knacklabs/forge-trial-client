@@ -11,11 +11,14 @@ and the Rules below, and leave the flow and the approval steps to the agent coor
 ### The flow
 
 1. A story starts as one short doc: `forge story new <KEY> "<title>"`.
-2. It gets one cold read (`forge read <KEY>`) and one approval from the human.
+2. It gets rounds of cold read (`forge read <KEY>`) until one finds nothing, then one approval
+   from the human.
 3. Each task runs in its own branch and worktree: `forge task start <KEY>/<TASK>`, then
    `forge work <KEY>/<TASK>`.
 4. `forge close <item>` closes it when the tests pass and the review finds no serious problem.
-5. The human merges. After the story's last merge, `forge story done <KEY> "<outcome>"`.
+5. The human merges unless the default branch's `forge.toml` has `merge = "agent"`.
+   Then, once close says Ready, the agent runs `forge merge <item>`. After the story's last merge,
+   `forge story done <KEY> "<outcome>"`.
 
 ### The lanes
 
@@ -27,10 +30,18 @@ and the Rules below, and leave the flow and the approval steps to the agent coor
 
 - Never commit to the default branch. Work happens on a story, task or fix branch, and the
   git hooks refuse anything else.
-- Never merge a pull request and never use `--no-verify`. Merging is the human's call.
-- Ask the human only to approve a story, to choose between options, or to merge.
+- Never run `gh pr merge` or use `--no-verify`. The agent merges only through
+  `forge merge <item>` when the default branch allows it; `merge = "human"` is the default.
+- Ask the human only to approve a story, to choose between options, or to merge when the repo
+  keeps the human merge setting.
 - No running commentary. Speak only when something lands, when a failure or finding needs the
   human, or when a decision is theirs, in a line or two.
 - Write for humans in plain English: no IDs, hashes or jargon in questions, pull request
   summaries or the board.
+- A story is approved through Plan Mode: exit Plan Mode with the text of the story doc that
+  `forge next` names, unchanged, as the plan: from its title down to `## For the builders`, or the
+  whole doc when it has no such heading. The approval matches its "What changes for you" and
+  "Done when" sections exactly, so a summary or a rewrite records nothing, and an edit below
+  `## For the builders` needs no new approval. There is no other approval step.
+- Run long `forge work` runs in the background and keep watching them.
 <!-- forge:end -->
